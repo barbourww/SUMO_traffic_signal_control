@@ -9,5 +9,5 @@
         <begin value="0"/>
         <end value="7200"/>
     </time>
-    <time-to-teleport value="-1"/>
+    <time-to-teleport value="100"/>
 </configuration>
