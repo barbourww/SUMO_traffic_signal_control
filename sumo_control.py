@@ -21,12 +21,14 @@ print("Simulation loaded.")
 junc = "42435645"
 junctions = traci.junction.getIDList()
 traffic_lights = traci.trafficlight.getIDList()
-print(len(traffic_lights), 'traffic lights', traffic_lights)
+traffic_lights_lanes = {}
+print(len(traffic_lights), 'traffic lights in network\n')
 assert(set(traffic_lights).issubset(set(junctions)))
 
 for tl in traffic_lights:
     traci.junction.subscribeContext(objectID=tl, domain=tc.CMD_GET_VEHICLE_VARIABLE, dist=50,
                                     varIDs=[tc.VAR_SPEED, tc.VAR_WAITING_TIME, tc.VAR_ACCUMULATED_WAITING_TIME])
+    traffic_lights_lanes[tl] = traci.trafficlight.getControlledLanes(tlsID=tl)
 
 step = 0
 arrived_veh_results = {}
@@ -57,8 +59,9 @@ while step < 150:
         for veh in tl_context:
             try:
                 if traci.vehicle.getNextTLS(vehID=veh)[0][0] == junc:
-                    # Do something with approaching vehicles
-                    pass
+                    # vehicle is on approach to this traffic light
+                    veh_lane = traci.vehicle.getLaneID(vehID=veh)
+                    print(veh_lane in traffic_lights_lanes[junc])
             except IndexError:
                 # vehicle is at the end of its route
                 pass
