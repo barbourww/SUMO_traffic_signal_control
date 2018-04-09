@@ -38,7 +38,8 @@ print(nx.shortest_path(g, '4207932666', '42447230'))
 
 routes = ET.Element('routes')
 rtree = ET.ElementTree(element=routes)
-v1 = ET.SubElement(routes, 'vType', attrib={'id': 'type1', 'length': '5', 'maxSpeed': '11.0'})
+v1 = ET.SubElement(routes, 'vType', attrib={'id': 'type1', 'length': '5', 'maxSpeed': '11.0', 'color': 'yellow'})
+v2 = ET.SubElement(routes, 'vType', attrib={'id': 'type2', 'length': '10', 'maxSpeed': '9.0', 'color': 'blue'})
 paths = []
 n_comb = len(list(combinations(deadends, r=2)))
 for (d1, l1), (d2, l2) in combinations(deadends, r=2):
@@ -52,9 +53,13 @@ print("Found {} of {} paths with routes.".format(len(paths), n_comb))
 paths.sort(key=lambda x: x[-1], reverse=True)
 add_paths_prop = 1.0
 for orig, dest, first_edge, last_edge, lanes1, lanes2, leng in paths[:int(len(paths)*add_paths_prop)]:
-    f = ET.SubElement(routes, 'flow',
-                      attrib={'id': '{}-{}'.format(orig, dest), 'begin': '0', 'end': '7200',
-                              'vehsPerHour': str(lanes1*360.),
-                              'from': first_edge, 'to': last_edge, 'type': 'type1'})
-print("Added {} flows.".format(int(len(paths)*add_paths_prop)))
+    f1 = ET.SubElement(routes, 'flow',
+                       attrib={'id': '{}-{}_vt1'.format(orig, dest), 'begin': '0', 'end': '7200',
+                               'vehsPerHour': str(lanes1 * 360.),
+                               'from': first_edge, 'to': last_edge, 'type': 'type1'})
+    f2 = ET.SubElement(routes, 'flow',
+                       attrib={'id': '{}-{}_vt2'.format(orig, dest), 'begin': '0', 'end': '7200',
+                               'vehsPerHour': str(lanes1 * 100.),
+                               'from': first_edge, 'to': last_edge, 'type': 'type2'})
+print("Added {} flows.".format(int(len(paths)*add_paths_prop*2)))
 rtree.write('nyc_routes.rou.xml', encoding='utf-8', xml_declaration=True)
