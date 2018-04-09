@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 4/9/2018 11:32:21 AM by Netedit Version 0.32.0
+<!-- generated on 4/9/2018 1:26:23 PM by Netedit Version 0.32.0
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
@@ -11820,11 +11820,6 @@
         <phase duration="39" state="rrrrrGGGGG"/>
         <phase duration="6" state="rrrrryyyyy"/>
     </tlLogic>
-    <tlLogic id="4616503098" type="static" programID="0" offset="0">
-        <phase duration="82" state="G"/>
-        <phase duration="3" state="y"/>
-        <phase duration="5" state="r"/>
-    </tlLogic>
     <tlLogic id="4862610026" type="static" programID="0" offset="0">
         <phase duration="39" state="GGGGGrrr"/>
         <phase duration="6" state="yyyyyrrr"/>
@@ -15437,7 +15432,7 @@
         <request index="0" response="00" foes="00" cont="0"/>
         <request index="1" response="00" foes="00" cont="0"/>
     </junction>
-    <junction id="4616503098" type="traffic_light" x="3519.73" y="5208.91" incLanes="455122830#0_0" intLanes=":4616503098_0_0" shape="3520.60,5210.26 3519.09,5207.44 3518.82,5207.59 3520.42,5210.36">
+    <junction id="4616503098" type="priority" x="3519.73" y="5208.91" incLanes="455122830#0_0" intLanes=":4616503098_0_0" shape="3520.60,5210.26 3519.09,5207.44 3518.82,5207.59 3520.42,5210.36">
         <request index="0" response="0" foes="0" cont="0"/>
     </junction>
     <junction id="4616503099" type="priority" x="3556.64" y="5279.14" incLanes="544549058_0" intLanes=":4616503099_0_0" shape="3557.50,5280.49 3556.01,5277.66 3555.81,5277.77 3557.23,5280.63">
@@ -17203,7 +17198,7 @@
     <connection from="452322756#3" to="452322756#4" fromLane="0" toLane="0" keepClear="0" via=":42452365_1_0" tl="42452365" linkIndex="1" dir="s" state="o"/>
     <connection from="452322756#4" to="46482604" fromLane="0" toLane="0" keepClear="0" via=":593921860_0_0" dir="s" state="M"/>
     <connection from="452322757" to="452322756#0" fromLane="0" toLane="0" via=":42428303_0_0" dir="s" state="M"/>
-    <connection from="455122830#0" to="455122830#1" fromLane="0" toLane="0" via=":4616503098_0_0" tl="4616503098" linkIndex="0" dir="s" state="o"/>
+    <connection from="455122830#0" to="455122830#1" fromLane="0" toLane="0" via=":4616503098_0_0" dir="s" state="M"/>
     <connection from="455122830#1" to="458166897#19" fromLane="0" toLane="0" via=":42448379_0_0" tl="42448379" linkIndex="0" dir="r" state="o"/>
     <connection from="455122830#1" to="455122830#2" fromLane="0" toLane="0" via=":42448379_1_0" tl="42448379" linkIndex="1" dir="s" state="o"/>
     <connection from="455122830#2" to="544812894" fromLane="0" toLane="0" via=":5266098185_0_0" dir="s" state="M"/>
