@@ -5,11 +5,31 @@ import os
 import csv
 import datetime as dt
 import time
+import sys
+
+if 'SUMO_HOME' in os.environ:
+    tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
+    sys.path.append(tools)
+else:
+    sys.exit("SUMO_HOME not in system environment variables. Please declare variable.")
+
+sumoBinaryCMD = "C:/Program Files (x86)/DLR/Sumo/bin/sumo.exe"
+sumoBinaryGUI = "C:/Program Files (x86)/DLR/Sumo/bin/sumo-gui.exe"
+
+sumoCmd = [sumoBinaryCMD, "-c", "./nyc.sumocfg"]
+
+import traci
+import traci.constants as tc
 
 
 def simulation(simulation_parameters):
     try:
         print("Simulation on process {}".format(mp.current_process().name))
+        traci.start(sumoCmd)
+        for i in range(50):
+            print("Step {}".format(i))
+            traci.simulationStep()
+        traci.close(wait=False)
     except BaseException as e:
         print("EXCEPTION ON PROCESS {}".format(mp.current_process().name))
         traceback.print_exc()
@@ -70,7 +90,7 @@ if __name__ == '__main__':
     # restore SIGINT handler in parent process after Pool created
     signal.signal(signal.SIGINT, original_sigint_handler)
 
-    simulation_config = []
+    simulation_config = [1, 2]
 
     try:
         # initiate shared results_writer
