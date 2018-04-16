@@ -1,6 +1,8 @@
 import os
 import sys
 from copy import copy
+import re
+import csv
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -13,8 +15,37 @@ sumoBinaryGUI = "C:/Program Files (x86)/DLR/Sumo/bin/sumo-gui.exe"
 
 sumoCmd = [sumoBinaryCMD, "-c", "./nyc.sumocfg"]
 
+
+def write_vehicle_results(all_arrived_vehicles, last_wrote_results_step):
+    with open(trial_filename, 'a') as f:
+        w = csv.writer(f, delimiter=';', quoting=csv.QUOTE_NONE)
+        for veh in all_arrived_vehicles:
+            if veh['arr_time'] > last_wrote_results_step:
+                w.writerow([veh[watching_vehicle_vars[k]] for k in watching_vehicle_vars_keys + ['arr_time']])
+
 import traci
 import traci.constants as tc
+
+# INPUTS
+signal_switch_time_overcome = 5
+signal_switch_vehicles_overcome = 4
+approaching_vehicle_vars = {'speed': tc.VAR_SPEED, 'waiting_time': tc.VAR_WAITING_TIME,
+                            'accumulated_waiting_time': tc.VAR_ACCUMULATED_WAITING_TIME}
+watching_vehicle_vars = {'distance': tc.VAR_DISTANCE, 'total_accumulated_waiting_time': tc.VAR_ACCUMULATED_WAITING_TIME}
+write_results_interval = 100
+# ------
+
+approaching_vehicle_vars_keys = approaching_vehicle_vars.keys()
+watching_vehicle_vars_keys = watching_vehicle_vars.keys()
+
+results_path = './results/'
+next_trial_num = max([int(tn.group(1)) for tn in
+                      [re.search('[A-z]*([0-9]*).csv', fn) for fn in os.listdir('./results')]]) + 1
+trial_filename = os.path.join(results_path, 'adaptive{}.csv'.format(next_trial_num))
+
+# ----------------
+# BEGIN SIMULATION
+# ----------------
 traci.start(sumoCmd)
 print("Simulation loaded.")
 
@@ -27,11 +58,12 @@ assert(set(traffic_lights).issubset(set(junctions)))
 
 for tl in traffic_lights:
     traci.junction.subscribeContext(objectID=tl, domain=tc.CMD_GET_VEHICLE_VARIABLE, dist=50,
-                                    varIDs=[tc.VAR_SPEED, tc.VAR_WAITING_TIME, tc.VAR_ACCUMULATED_WAITING_TIME])
+                                    varIDs=approaching_vehicle_vars.values())
     traffic_lights_lanes[tl] = traci.trafficlight.getControlledLanes(tlsID=tl)
     traffic_lights_links[tl] = traci.trafficlight.getControlledLinks(tlsID=tl)
 
 step = 0
+last_wrote_results = -1
 arrived_veh_results = {}
 old_veh_subscriptions = []
 
@@ -43,7 +75,7 @@ while step < 150:
     sim_time = traci.simulation.getCurrentTime()
 
     for dep_veh in traci.simulation.getDepartedIDList():
-        traci.vehicle.subscribe(dep_veh, [tc.VAR_DISTANCE, tc.VAR_ACCUMULATED_WAITING_TIME])
+        traci.vehicle.subscribe(dep_veh, watching_vehicle_vars.values())
     new_veh_subscriptions = traci.vehicle.getSubscriptionResults()
 
     cur_vehs = traci.vehicle.getIDList()
@@ -78,16 +110,22 @@ while step < 150:
                 except IndexError:
                     # vehicle is at the end of its route
                     pass
-
-        if state_counts.get('r', 0) > state_counts.get('g', 0) and 'y' not in ryg_state:
-            try:
-                traci.trafficlight.setPhase(tlsID=tl, index=state_idx+1)
-            except traci.exceptions.TraCIException:
-                traci.trafficlight.setPhase(tlsID=tl, index=0)
+        if 'y' not in ryg_state:
+            if state_counts.get('r', 0) >= state_counts.get('g', 0) + signal_switch_vehicles_overcome:
+                if state_remaining_time <= signal_switch_time_overcome:
+                    try:
+                        traci.trafficlight.setPhase(tlsID=tl, index=state_idx+1)
+                    except traci.exceptions.TraCIException:
+                        traci.trafficlight.setPhase(tlsID=tl, index=0)
 
     old_veh_subscriptions = copy(new_veh_subscriptions)
+    if step % write_results_interval == 0:
+        write_vehicle_results(all_arrived_vehicles=arrived_veh_results, last_wrote_results_step=last_wrote_results)
+        last_wrote_results = step
+
     traci.simulationStep()
     step += 1
 
 print(arrived_veh_results)
 traci.close(False)
+
