@@ -87,6 +87,4 @@ for tl in root.findall('tlLogic'):
 #		modify phase durations accoding to duration list
 #	check total duration of phases and print errors
 
-#need to adjust for 42437363 and 42437670
-
 tree.write('nyc_tl_synchronized.net.xml', encoding='utf-8', xml_declaration=True)
