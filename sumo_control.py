@@ -16,12 +16,17 @@ sumoBinaryGUI = "C:/Program Files (x86)/DLR/Sumo/bin/sumo-gui.exe"
 sumoCmd = [sumoBinaryCMD, "-c", "./nyc.sumocfg"]
 
 
-def write_vehicle_results(all_arrived_vehicles, last_wrote_results_step):
-    with open(trial_filename, 'a') as f:
+def write_vehicle_results(all_arrived_vehicles, last_wrote_results_step, filename):
+    with open(filename, 'a') as f:
         w = csv.writer(f, delimiter=';', quoting=csv.QUOTE_NONE)
         for veh in all_arrived_vehicles:
             if veh['arr_time'] > last_wrote_results_step:
                 w.writerow([veh[watching_vehicle_vars[k]] for k in watching_vehicle_vars_keys + ['arr_time']])
+
+
+def write_intersecction_results(all_intersections, last_wrote_results_step, filename):
+    with open(filename, 'a') as f:
+        w = csv.writer(f, delimiter=';', quoting=csv.QUOTE_NONE)
 
 import traci
 import traci.constants as tc
@@ -41,7 +46,8 @@ watching_vehicle_vars_keys = watching_vehicle_vars.keys()
 results_path = './results/'
 next_trial_num = max([int(tn.group(1)) for tn in
                       [re.search('[A-z]*([0-9]*).csv', fn) for fn in os.listdir('./results')]]) + 1
-trial_filename = os.path.join(results_path, 'adaptive{}.csv'.format(next_trial_num))
+trial_filename_vehs = os.path.join(results_path, 'adaptive{}_vehs.csv'.format(next_trial_num))
+trial_filename_junc = os.path.join(results_path, 'adaptive{}_junc.csv'.format(next_trial_num))
 
 # ----------------
 # BEGIN SIMULATION
@@ -120,7 +126,8 @@ while step < 150:
 
     old_veh_subscriptions = copy(new_veh_subscriptions)
     if step % write_results_interval == 0:
-        write_vehicle_results(all_arrived_vehicles=arrived_veh_results, last_wrote_results_step=last_wrote_results)
+        write_vehicle_results(all_arrived_vehicles=arrived_veh_results, last_wrote_results_step=last_wrote_results,
+                              filename=trial_filename_vehs)
         last_wrote_results = step
 
     traci.simulationStep()
