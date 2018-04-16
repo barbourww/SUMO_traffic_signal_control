@@ -26,9 +26,13 @@ def simulation(simulation_parameters):
     try:
         print("Simulation on process {}".format(mp.current_process().name))
         traci.start(sumoCmd)
-        for i in range(50):
-            print("Step {}".format(i))
+        # run for fixed number of steps
+        for step in range(50):
+            print("Step {}".format(step))
             traci.simulationStep()
+        # run to completion
+        # while traci.simulation.getMinExpectedNumber() > 0:
+        #     traci.simulationStep()
         traci.close(wait=False)
     except BaseException as e:
         print("EXCEPTION ON PROCESS {}".format(mp.current_process().name))
@@ -100,9 +104,9 @@ if __name__ == '__main__':
         # initiate worker processes
         # ITERATE OVER PARAMETER CONFIGURATIONS
         jobs = []
-        for i, sim_param in enumerate(simulation_config):
+        for sim_i, sim_param in enumerate(simulation_config):
             job = pool.apply_async(simulation, (sim_param,))
-            jobs.append((i, job))
+            jobs.append((sim_i, job))
         for i, job in jobs:
             g = job.get()
             if g == 'EXCEPTION':
