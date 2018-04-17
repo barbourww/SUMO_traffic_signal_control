@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="http://sumo.sf.net/xsd/sumoConfiguration.xsd">
+    <time>
+        <begin value="0"/>
+        <end value="5400"/>
+    </time>
+    <time-to-teleport value="250"/>
+    <waiting-time-memory value="1000000"/>
+</configuration>
