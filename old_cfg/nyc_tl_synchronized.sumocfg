@@ -2,7 +2,7 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="http://sumo.sf.net/xsd/sumoConfiguration.xsd">
     <input>
-        <net-file value="nyc_edit.net.xml"/>
+        <net-file value="nyc_tl_synchronized.net.xml"/>
         <route-files value="nyc_routes.rou.xml"/>
     </input>
     <time>
