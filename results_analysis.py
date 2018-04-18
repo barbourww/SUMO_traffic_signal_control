@@ -89,7 +89,7 @@ else:
         ax.set_title("Traffic control methodology comparison")
         plt.show()
 
-    if True:
+    if False:
         adaptive = [c for c in data if c['trial_num'] == '7'][0]['veh_data']
         random = [c for c in data if c['trial_num'] == '11'][0]['veh_data']
         sync = [c for c in data if c['trial_num'] == '13'][0]['veh_data']
@@ -145,5 +145,25 @@ else:
 
         plt.show()
 
+    if True:
+        adaptive = [c for c in data if c['trial_num'] == '7'][0]['veh_data']
+        random = [c for c in data if c['trial_num'] == '11'][0]['veh_data']
+        sync = [c for c in data if c['trial_num'] == '13'][0]['veh_data']
+
+        fig, ax = plt.subplots(1, 1)
+        adaptive_hist, adaptive_bins = np.histogram(np.array([float(a['arr_time']) for a in adaptive]), bins=1000)
+        adaptive_hist = np.cumsum(adaptive_hist)
+        random_hist, random_bins = np.histogram(np.array([float(a['arr_time']) for a in random]), bins=1000)
+        random_hist = np.cumsum(random_hist)
+        sync_hist, sync_bins = np.histogram(np.array([float(a['arr_time']) for a in sync]), bins=1000)
+        sync_hist = np.cumsum(sync_hist)
+
+        ax.plot(adaptive_bins[1:], adaptive_hist, label='adaptive', color='darkcyan')
+        ax.plot(random_bins[1:], random_hist, label='random', color='darkmagenta')
+        ax.plot(sync_bins[1:], sync_hist, label='synchronized', color='darkorange')
+        ax.set_title("Cumulative number of vehicle arrivals")
+        ax.set_xlabel("Epoch")
+        plt.legend()
+        plt.show()
 
 
