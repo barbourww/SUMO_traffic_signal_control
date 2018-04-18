@@ -1,0 +1,99 @@
+tripinfo = open("adaptive10_trip_info.xml")
+with  open("testout1.csv","w+") as tripout:
+
+    tripstr = tripinfo.read()
+
+    endstring = "tripid, departtime, departlane, departpos, departspeed, "
+    endstring = endstring + "departdelay, arrival, arrivallane, arrivalspeed, "
+    endstring = endstring + "arrivalpos, duration, routelength, waitsteps, timeloss, "
+    endstring = endstring + "rerouteno, devices, vtype, speedfactor, vaporized"
+
+    tripout.write(endstring)
+    n = len(tripstr) -50
+    index1 = 0
+    index2 = 0
+    while index1< n : 
+    
+        endstring = "\n"
+
+        index1 = tripstr.find("tripinfo id=",index2)
+        index2 = tripstr.find("depart", index1)
+
+        tripid = tripstr[index1+13:index2-2]
+        endstring = endstring + tripid + ", "
+
+        index1 = tripstr.find("departLane",index2)
+        departtime = tripstr[index2+8:index1-2]
+        endstring = endstring + departtime + ", "
+
+        index2 = tripstr.find("departPos", index1)
+        departlane = tripstr[index1+12:index2-2]
+        endstring = endstring + departlane + ", "
+
+        index1 = tripstr.find("departSpeed", index2)
+        departpos = tripstr[index2+11:index1-2]
+        endstring = endstring + departpos + ", "
+
+        index2 = tripstr.find("departDelay", index1)
+        departspeed = tripstr[index1+13:index2-2]
+        endstring = endstring + departspeed + ", "
+
+        index1 = tripstr.find("arrival", index2)
+        departdelay = tripstr[index2+13:index1-2]
+        endstring = endstring + departdelay + ", "
+
+        index2 = tripstr.find("arrivalLane", index1)
+        arrival = tripstr[index1+9:index2-2]
+        endstring = endstring + arrival + ", "
+
+        index1 = tripstr.find("arrivalPos", index2)
+        arrivallane = tripstr[index2+13:index1-2]
+        endstring = endstring + arrivallane + ", "
+
+        index2 = tripstr.find("arrivalSpeed", index1)
+        arrivalpos = tripstr[index1+12:index2-2]
+        endstring = endstring + arrivalpos + ", "
+
+        index1 = tripstr.find("duration", index2)
+        arrivalspeed = tripstr[index2+14:index1-2]
+        endstring = endstring + arrivalspeed + ", "
+
+        index2 = tripstr.find("routeLength", index1)
+        duration = tripstr[index1+10:index2-2]
+        endstring = endstring + duration + ", "
+
+        index1 = tripstr.find("waitSteps", index2)
+        routelength = tripstr[index2+13:index1-2]
+        endstring = endstring + routelength + ", "
+
+        index2 = tripstr.find("timeLoss", index1)
+        waitsteps = tripstr[index1+11:index2-2]
+        endstring = endstring + waitsteps + ", "
+
+        index1 = tripstr.find("rerouteNo", index2)
+        timeloss = tripstr[index2+10:index1-2]
+        endstring = endstring + timeloss + ", "
+
+        index2 = tripstr.find("devices", index1)
+        rerouteno = tripstr[index1+11:index2-2]
+        endstring = endstring + rerouteno + ", "
+
+        index1 = tripstr.find("vType", index2)
+        devices = tripstr[index2+9:index1-2]
+        endstring = endstring + devices + ", "
+
+        index2 = tripstr.find("speedFactor", index1)
+        vtype = tripstr[index1+7:index2-2]
+        endstring = endstring + vtype + ", "
+
+        index1 = tripstr.find("vaporized", index2)
+        speedfactor = tripstr[index2+13:index1-2]
+        endstring = endstring + speedfactor + ", "
+
+        index2 = tripstr.find(">", index1)
+        vaporized = tripstr[index1+11:index2-2]
+        if vaporized == "":
+            vaporized = "0"
+        endstring = endstring + vaporized
+
+        tripout.write(endstring)
