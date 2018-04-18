@@ -1,0 +1,8 @@
+7 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+8 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+9 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+10 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+11 random_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+12 random_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+13 synchronized_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+14 synchronized_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}

@@ -72,7 +72,7 @@ def random_signal_timing(veh_flow_scale, tl_program_time, trial_num, write_resul
         vehicle_csv_header = ['veh_ID'] + watching_vehicle_vars_keys + ['dep_time', 'arr_time', 'teleported']
         simulation_csv_header = ['epoch', 'cumulative_distance', 'cumulative_waiting_time']
 
-        results_path = './results/'
+        results_path = './other_results/'
         trial_filename_vehs = os.path.join(results_path, 'random{}_vehs.csv'.format(trial_num))
         trial_filename_sim = os.path.join(results_path, 'random{}_sim.csv'.format(trial_num))
         trial_filename_trip_info = os.path.join(results_path, 'random{}_trip_info.xml'.format(trial_num))
@@ -195,7 +195,7 @@ def synchronized_signal_timing(veh_flow_scale, tl_program_time, trial_num, write
         vehicle_csv_header = ['veh_ID'] + watching_vehicle_vars_keys + ['dep_time', 'arr_time', 'teleported']
         simulation_csv_header = ['epoch', 'cumulative_distance', 'cumulative_waiting_time']
 
-        results_path = './results/'
+        results_path = './other_results/'
         trial_filename_vehs = os.path.join(results_path, 'sync{}_vehs.csv'.format(trial_num))
         trial_filename_sim = os.path.join(results_path, 'sync{}_sim.csv'.format(trial_num))
         trial_filename_trip_info = os.path.join(results_path, 'sync{}_trip_info.xml'.format(trial_num))
@@ -320,7 +320,7 @@ def adaptive_traffic_lights(signal_switch_time_overcome, signal_switch_vehicles_
         vehicle_csv_header = ['veh_ID'] + watching_vehicle_vars_keys + ['dep_time', 'arr_time', 'teleported']
         simulation_csv_header = ['epoch', 'cumulative_distance', 'cumulative_waiting_time']
 
-        results_path = './results/'
+        results_path = './other_results/'
         trial_filename_vehs = os.path.join(results_path, 'adaptive{}_vehs.csv'.format(trial_num))
         trial_filename_sim = os.path.join(results_path, 'adaptive{}_sim.csv'.format(trial_num))
         trial_filename_trip_info = os.path.join(results_path, 'adaptive{}_trip_info.xml'.format(trial_num))
@@ -489,18 +489,18 @@ def shared_results_writer(results_queue, single_result=None):
 if __name__ == '__main__':
     results_write_interval = 700
     simulation_config = [(adaptive_traffic_lights,
-                          {'signal_switch_time_overcome': [5, 10],
-                           'signal_switch_vehicles_overcome': [5, 10],
+                          {'signal_switch_time_overcome': [10],
+                           'signal_switch_vehicles_overcome': [10],
                            'signal_sync_interval': [None, 2.],
-                           'veh_flow_scale': [5, 15],
+                           'veh_flow_scale': [2],
                            'tl_program_time': [60, 90],
                            'write_results_interval': [results_write_interval]}),
                          (random_signal_timing,
-                          {'veh_flow_scale': [5, 15],
+                          {'veh_flow_scale': [2],
                            'tl_program_time': [60, 90],
                            'write_results_interval': [results_write_interval]}),
                          (synchronized_signal_timing,
-                          {'veh_flow_scale': [5, 15],
+                          {'veh_flow_scale': [2],
                            'tl_program_time': [60, 90],
                            'write_results_interval': [results_write_interval]})
                          ]
@@ -512,10 +512,10 @@ if __name__ == '__main__':
         for vc in product(*v):
             sim_runs.append((model, {param: val for param, val in zip(p, vc)}))
 
-    fn_matches = [re.search('[A-z]*([0-9]*)_[A-z]*.csv', fn) for fn in os.listdir('./results')]
+    fn_matches = [re.search('[A-z]*([0-9]*)_[A-z]*.csv', fn) for fn in os.listdir('./other_results')]
     next_trial_num = max([int(tn.group(1)) for tn in fn_matches if tn is not None and tn.group(1) != ''],
                          default=0) + 1
-    runs_fn = 'results/runs{}.txt'.format(next_trial_num)
+    runs_fn = 'other_results/runs{}.txt'.format(next_trial_num)
     with open(runs_fn, 'w') as f:
         for ei, (m, p) in enumerate(sim_runs):
             f.write(str(ei + next_trial_num) + ' ' + m.__name__ + ' ' + str(p) + '\n')
