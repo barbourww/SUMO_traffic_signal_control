@@ -57,6 +57,7 @@ if 'consolidated.pkl' not in os.listdir(results_directory):
 else:
     with open(os.path.join(results_directory, 'consolidated.pkl'), 'rb') as f:
         data = [c for c in pickle.load(f) if c['parameters']['veh_flow_scale'] == 1.5]
+        data.sort(key=lambda x: (x['control'].split('_')[0], float(x['parameters']['tl_program_time']), str(x['parameters'].get('signal_sync_interval', '')), x['parameters'].get('signal_switch_time_overcome', '')))
 
     if False:
         ind = np.arange(len(data))
@@ -78,38 +79,42 @@ else:
             mw = np.mean(waits)
             mean_waits.append(mw)
             sw = np.std(waits)
-            print(config['trial_num'], config['control'], config['parameters'], m, s, mw, sw)
-            labels.append(config['control'].split('_')[0] + '-' + str(config['parameters']['tl_program_time']) + '-' + str(config['parameters'].get('signal_sync_interval', '')))
+            print("{:.2f}".format(m), "{:.2f}".format(s), "{:.2f}".format(mw), "{:.2f}".format(sw),
+                  config['trial_num'], config['control'], config['parameters'])
+            labels.append(config['control'].split('_')[0] + '-' + str(config['parameters']['tl_program_time']) + '-' + str(config['parameters'].get('signal_sync_interval', '')) + '-' + str(config['parameters'].get('signal_switch_time_overcome', '')) + '-' + str(config['parameters'].get('signal_switch_vehicles_overcome', '')))
         ax.bar(ind - width/2, mean_speeds, width, yerr=std_speeds, color='SkyBlue', label='Mean Veh Speed')
         axsec.bar(ind + width/2, mean_waits, width, color='IndianRed', label='Mean Veh Wait Time')
         ax.set_xticks(ind)
-        ax.set_xticklabels(labels, rotation=45)
+        ax.set_xticklabels(labels, rotation=90)
         ax.set_ylabel("Speed (m/s)", color='SkyBlue')
         axsec.set_ylabel("Wait time (s)", color='IndianRed')
+        ax.set_xlabel("(signal scheme) - (program time) - (adaptive re-sync interval) - (adaptive preempt maximum seconds) - (adaptive preempt vehicle threshold)")
         ax.set_title("Traffic control methodology comparison")
         plt.show()
 
-    if False:
-        adaptive = [c for c in data if c['trial_num'] == '7'][0]['veh_data']
-        random = [c for c in data if c['trial_num'] == '11'][0]['veh_data']
-        sync = [c for c in data if c['trial_num'] == '13'][0]['veh_data']
+    if True:
+        adaptive1 = [c for c in data if c['trial_num'] == '43'][0]['veh_data']
+        adaptive2 = [c for c in data if c['trial_num'] == '7'][0]['veh_data']
+        random = [c for c in data if c['trial_num'] == '64'][0]['veh_data']
+        sync = [c for c in data if c['trial_num'] == '66'][0]['veh_data']
 
-        adaptive_teleports = len([0 for v in adaptive if v['teleported'] == 'True'])
+        adaptive_teleports1 = len([0 for v in adaptive1 if v['teleported'] == 'True'])
+        adaptive_teleports2 = len([0 for v in adaptive2 if v['teleported'] == 'True'])
         random_teleports = len([0 for v in random if v['teleported'] == 'True'])
         sync_teleports = len([0 for v in sync if v['teleported'] == 'True'])
 
         fig, ax = plt.subplots(1, 1)
-        ax.bar(np.arange(3) - 0.4, [adaptive_teleports, random_teleports, sync_teleports], width=0.8,
+        ax.bar(np.arange(4) - 0.4, [adaptive_teleports1, adaptive_teleports2, random_teleports, sync_teleports], width=0.8,
                color='forestgreen')
         ax.set_title("Number of teleported vehicles due to congestion")
-        ax.set_xticks(np.arange(3) - 0.4)
-        ax.set_xticklabels(['adaptive', 'random', 'synchronized'])
+        ax.set_xticks(np.arange(4) - 0.4)
+        ax.set_xticklabels(['adaptive-45', 'adaptive-60', 'random', 'synchronized'])
         plt.show()
 
         fig, axes = plt.subplots(nrows=3, ncols=2)
-        adaptive_speeds = [float(v['distance']) / (int(v['arr_time']) - int(v['dep_time'])) for v in adaptive
+        adaptive_speeds = [float(v['distance']) / (int(v['arr_time']) - int(v['dep_time'])) for v in adaptive1
                            if v['teleported'] == 'False']
-        adaptive_waits = [float(v['total_accumulated_waiting_time']) for v in adaptive if v['teleported'] == 'False']
+        adaptive_waits = [float(v['total_accumulated_waiting_time']) for v in adaptive1 if v['teleported'] == 'False']
         random_speeds = [float(v['distance']) / (int(v['arr_time']) - int(v['dep_time'])) for v in random if
                          v['teleported'] == 'False']
         random_waits = [float(v['total_accumulated_waiting_time']) for v in random if v['teleported'] == 'False']
@@ -129,12 +134,12 @@ else:
         axes[2, 0].hist(sync_speeds, bins=100, range=(min_speed, max_speed))
         axes[2, 1].hist(sync_waits, bins=100, range=(min_wait, max_wait))
 
-        axes[0, 0].set_ylim((0, 400))
-        axes[0, 1].set_ylim((0, 1200))
-        axes[1, 0].set_ylim((0, 400))
-        axes[1, 1].set_ylim((0, 1200))
-        axes[2, 0].set_ylim((0, 400))
-        axes[2, 1].set_ylim((0, 1200))
+        axes[0, 0].set_ylim((0, 500))
+        axes[0, 1].set_ylim((0, 1400))
+        axes[1, 0].set_ylim((0, 500))
+        axes[1, 1].set_ylim((0, 1400))
+        axes[2, 0].set_ylim((0, 500))
+        axes[2, 1].set_ylim((0, 1400))
 
         axes[0, 0].set_title("Adaptive - speed distribution")
         axes[0, 1].set_title("Adaptive - wait time distribution")
@@ -146,12 +151,12 @@ else:
         plt.show()
 
     if True:
-        adaptive = [c for c in data if c['trial_num'] == '7'][0]['veh_data']
-        random = [c for c in data if c['trial_num'] == '11'][0]['veh_data']
-        sync = [c for c in data if c['trial_num'] == '13'][0]['veh_data']
+        adaptive1 = [c for c in data if c['trial_num'] == '43'][0]['veh_data']
+        random = [c for c in data if c['trial_num'] == '64'][0]['veh_data']
+        sync = [c for c in data if c['trial_num'] == '66'][0]['veh_data']
 
         fig, ax = plt.subplots(1, 1)
-        adaptive_hist, adaptive_bins = np.histogram(np.array([float(a['arr_time']) for a in adaptive]), bins=1000)
+        adaptive_hist, adaptive_bins = np.histogram(np.array([float(a['arr_time']) for a in adaptive1]), bins=1000)
         adaptive_hist = np.cumsum(adaptive_hist)
         random_hist, random_bins = np.histogram(np.array([float(a['arr_time']) for a in random]), bins=1000)
         random_hist = np.cumsum(random_hist)

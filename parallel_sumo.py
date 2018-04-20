@@ -489,19 +489,19 @@ def shared_results_writer(results_queue, single_result=None):
 if __name__ == '__main__':
     results_write_interval = 700
     simulation_config = [(adaptive_traffic_lights,
-                          {'signal_switch_time_overcome': [10],
-                           'signal_switch_vehicles_overcome': [10],
+                          {'signal_switch_time_overcome': [10, 15],
+                           'signal_switch_vehicles_overcome': [5, 10],
                            'signal_sync_interval': [None, 2.],
-                           'veh_flow_scale': [2],
-                           'tl_program_time': [60, 90],
+                           'veh_flow_scale': [1.5],
+                           'tl_program_time': [45, 60, 75, 90, 105],
                            'write_results_interval': [results_write_interval]}),
                          (random_signal_timing,
-                          {'veh_flow_scale': [2],
-                           'tl_program_time': [60, 90],
+                          {'veh_flow_scale': [1.5],
+                           'tl_program_time': [45, 75, 105],
                            'write_results_interval': [results_write_interval]}),
                          (synchronized_signal_timing,
-                          {'veh_flow_scale': [2],
-                           'tl_program_time': [60, 90],
+                          {'veh_flow_scale': [1.5],
+                           'tl_program_time': [45, 75, 105],
                            'write_results_interval': [results_write_interval]})
                          ]
 
