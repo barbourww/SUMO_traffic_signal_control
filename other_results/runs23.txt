@@ -1,0 +1,46 @@
+23 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+24 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+25 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+26 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+27 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+28 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+29 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+30 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+31 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+32 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+33 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+34 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+35 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+36 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+37 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+38 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+39 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+40 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+41 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+42 adaptive_traffic_lights {'signal_switch_time_overcome': 10, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+43 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+44 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+45 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+46 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+47 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+48 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+49 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+50 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+51 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+52 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 5, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+53 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+54 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+55 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+56 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+57 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': None, 'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+58 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+59 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 60, 'write_results_interval': 700}
+60 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+61 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 90, 'write_results_interval': 700}
+62 adaptive_traffic_lights {'signal_switch_time_overcome': 15, 'signal_switch_vehicles_overcome': 10, 'signal_sync_interval': 2.0, 'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+63 random_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+64 random_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+65 random_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
+66 synchronized_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 45, 'write_results_interval': 700}
+67 synchronized_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 75, 'write_results_interval': 700}
+68 synchronized_signal_timing {'veh_flow_scale': 1.5, 'tl_program_time': 105, 'write_results_interval': 700}
